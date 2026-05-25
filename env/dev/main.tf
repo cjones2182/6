@@ -9,7 +9,6 @@ module "vpc" {
   private_subnets    = var.private_subnets
   database_subnets   = var.database_subnets
   environment        = var.environment
-  
 }
 module "security-groups" {
   source      = "../../modules/security-groups"
@@ -41,4 +40,5 @@ module "rds" {
   source = "../../modules/rds"
   aws_secretsmanager_secret = module.secrets.aws_secretsmanager_secret
   rds_security_group = module.security-groups.rds_security_group
+  database_subnets = module.vpc.database_subnets
 }

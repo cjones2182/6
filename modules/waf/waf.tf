@@ -32,28 +32,9 @@ default_action {
     }
   }
 
-   rule {
-    name = "AWSManagedRulesKnownBadInputsRuleSet"
-    priority = 2
-
-    override_action {
-      none {}
-    }
-    statement {
-      managed_rule_group_statement {
-        name = "AWSManagedRulesKnownBadInputsRuleSet"
-        vendor_name = "AWS"
-      }
-    }
-    visibility_config {
-        cloudwatch_metrics_enabled = true
-        metric_name = "AWSManagedRulesKnownBadInputsRuleSet"
-        sampled_requests_enabled = false
-    }
-  }
   rule {
     name = "AWSManagedRulesAmazonIpReputationList"
-    priority = 2
+    priority = 3
 
     override_action {
       none {}
@@ -79,7 +60,7 @@ default_action {
     }
     statement {
       managed_rule_group_statement {
-        name = "AAWSManagedRulesKnownBadInputsRuleSet"
+        name = "AWSManagedRulesKnownBadInputsRuleSet"
         vendor_name = "AWS"
       }
     }

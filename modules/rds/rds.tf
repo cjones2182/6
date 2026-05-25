@@ -1,6 +1,6 @@
 resource "aws_db_instance" "main_rds" {
   allocated_storage    = 10
-  db_name              = "main-rds-storage"
+  db_name              = "mainRdsStorage"
   engine               = "mysql"
   engine_version       = "8.4.8"
   instance_class       = "db.t3.micro"

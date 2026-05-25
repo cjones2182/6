@@ -4,12 +4,12 @@
 module "vpc" {
   source             = "../../modules/vpc"
   vpc_cidr_block     = var.vpc_cidr_block
-  vpc_id             = var.vpc_id
   public_subnets     = var.public_subnets
   availability_zones = var.availability_zones
   private_subnets    = var.private_subnets
   database_subnets   = var.database_subnets
   environment        = var.environment
+  
 }
 module "security-groups" {
   source      = "../../modules/security-groups"

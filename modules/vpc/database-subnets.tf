@@ -1,6 +1,6 @@
 resource "aws_subnet" "database_subnets" {
  count = length(var.database_subnets) 
- vpc_id = var.vpc_id
+ vpc_id = aws_vpc.main.id
  cidr_block = var.database_subnets[count.index]
  availability_zone = var.availability_zones[count.index]
 

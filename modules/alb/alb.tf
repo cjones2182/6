@@ -6,7 +6,7 @@ resource "aws_lb" "main_alb" {
   subnets            = var.public_subnets
 
 access_logs {
-  bucket = var.central_log_bucket
+  bucket = var.central_log_bucket281330
   enabled = true
   }
   tags = {

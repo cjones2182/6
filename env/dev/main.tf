@@ -19,9 +19,9 @@ module "alb" {
   source             = "../../modules/alb"
   alb_security_group = module.security-groups.alb_security_group
   public_subnets     = module.vpc.public_subnets
-  central_log_bucket = module.s3.central_log_bucket
   vpc_id             = module.vpc.vpc_id
   environment        = var.environment
+  central_log_bucket281330 = module.s3.central_log_bucket281330
 }
 module "s3" {
   source = "../../modules/s3"

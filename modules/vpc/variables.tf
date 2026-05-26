@@ -24,4 +24,8 @@ variable "database_subnets" {
   description = "database subnets"
   type = list(string)
 }
+variable "endpoint_security_group" {
+  description = "endpoint security group"
+  type = string
+}
 

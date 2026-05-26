@@ -12,3 +12,7 @@ output "rds_security_group" {
   description = "rds security group"
   value = aws_security_group.rds_security_group.id
 }
+output "endpoint_security_group" {
+  description = "endpoint security group"
+  value = aws_security_group.endpoint_security_group.id
+}

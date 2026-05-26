@@ -9,6 +9,7 @@ module "vpc" {
   private_subnets    = var.private_subnets
   database_subnets   = var.database_subnets
   environment        = var.environment
+  endpoint_security_group = module.security-groups.endpoint_security_group
 }
 module "security-groups" {
   source      = "../../modules/security-groups"

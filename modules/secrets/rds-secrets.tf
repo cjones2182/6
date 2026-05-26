@@ -17,3 +17,4 @@ resource "aws_secretsmanager_secret_version" "rds_secrets_version" {
         "password": random_password.rds_random_password.result
     })
 }
+

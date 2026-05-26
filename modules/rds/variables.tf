@@ -10,3 +10,7 @@ variable "database_subnets" {
   description = "database subnets"
   type = list(string)
 }
+variable "environment" {
+  description = "environment"
+  type = string
+}

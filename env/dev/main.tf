@@ -42,4 +42,5 @@ module "rds" {
   aws_secretsmanager_secret = module.secrets.aws_secretsmanager_secret
   rds_security_group        = module.security-groups.rds_security_group
   database_subnets          = module.vpc.database_subnets
+  environment =  var.environment
 }

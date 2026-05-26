@@ -16,12 +16,12 @@ module "security-groups" {
   environment = var.environment
 }
 module "alb" {
-  source                 = "../../modules/alb"
-  alb_security_group     = module.security-groups.alb_security_group
-  public_subnets         = module.vpc.public_subnets
-  alb_access_logs_bucket = module.s3.alb_access_logs_bucket
-  vpc_id                 = module.vpc.vpc_id
-  environment            = var.environment
+  source             = "../../modules/alb"
+  alb_security_group = module.security-groups.alb_security_group
+  public_subnets     = module.vpc.public_subnets
+  central_log_bucket = module.s3.central_log_bucket
+  vpc_id             = module.vpc.vpc_id
+  environment        = var.environment
 }
 module "s3" {
   source = "../../modules/s3"
@@ -37,8 +37,8 @@ module "secrets" {
   source = "../../modules/secrets"
 }
 module "rds" {
-  source = "../../modules/rds"
+  source                    = "../../modules/rds"
   aws_secretsmanager_secret = module.secrets.aws_secretsmanager_secret
-  rds_security_group = module.security-groups.rds_security_group
-  database_subnets = module.vpc.database_subnets
+  rds_security_group        = module.security-groups.rds_security_group
+  database_subnets          = module.vpc.database_subnets
 }

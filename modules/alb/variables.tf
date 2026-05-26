@@ -6,7 +6,7 @@ variable "public_subnets" {
   description = "public subnets"
   type = list(string)
 }
-variable "alb_access_logs_bucket" {
+variable "central_log_bucket" {
   description = "acess logs bucket"
   type = string
 }

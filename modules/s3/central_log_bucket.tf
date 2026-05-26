@@ -1,21 +1,21 @@
 # bucket creation 
-resource "aws_s3_bucket" "alb_access_logs_bucket" {
+resource "aws_s3_bucket" "central_log_bucket" {
   bucket = "alb-access-logs"
 
 object_lock_enabled = true
 }
 
 # bucket versioning
-resource "aws_s3_bucket_versioning" "alb_access_logs_versioning" {
-  bucket = aws_s3_bucket.alb_access_logs_bucket.id
+resource "aws_s3_bucket_versioning" "central_log_bucket" {
+  bucket = aws_s3_bucket.central_log_bucket.id
 
   versioning_configuration {
     status = "Enabled"
   }
 }
 # bucket object lock configuration
-resource "aws_s3_bucket_object_lock_configuration" "alb_access_logs_object_lock_config" {
-  bucket = aws_s3_bucket.alb_access_logs_bucket.id
+resource "aws_s3_bucket_object_lock_configuration" "central_log_bucket_object_lock_config" {
+  bucket = aws_s3_bucket.central_log_bucket.id
 
   rule {
     default_retention {
@@ -25,8 +25,8 @@ resource "aws_s3_bucket_object_lock_configuration" "alb_access_logs_object_lock_
   }
 }
 # public access block 
-resource "aws_s3_bucket_public_access_block" "alb_access_logs_public_access_block" {
- bucket = aws_s3_bucket.alb_access_logs_bucket.id
+resource "aws_s3_bucket_public_access_block" "central_log_bucket_public_access_block" {
+ bucket = aws_s3_bucket.central_log_bucket.id
 
   block_public_acls       = true
   block_public_policy     = true
@@ -35,8 +35,8 @@ resource "aws_s3_bucket_public_access_block" "alb_access_logs_public_access_bloc
 }
 
 # bucket sse 
-resource "aws_s3_bucket_server_side_encryption_configuration" "name" {
- bucket = aws_s3_bucket.alb_access_logs_bucket.id
+resource "aws_s3_bucket_server_side_encryption_configuration" "central_log_bucket_sse" {
+ bucket = aws_s3_bucket.central_log_bucket.id
 rule {
   apply_server_side_encryption_by_default {
     sse_algorithm = "AES256"
@@ -45,7 +45,7 @@ rule {
  }
 }
 resource "aws_s3_bucket_policy" "access_logs_bucket_policy" {
- bucket =  aws_s3_bucket.alb_access_logs_bucket.id
+ bucket =  aws_s3_bucket_versioning.central_log_bucket.id
 
  policy = jsonencode({
     Version = 2012-10-17
@@ -57,7 +57,7 @@ resource "aws_s3_bucket_policy" "access_logs_bucket_policy" {
         "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
       },
       "Action": "s3:PutObject"
-      "resource": "${aws_s3_bucket.alb_access_logs_bucket.arn}/*"
+      "resource": "${aws_s3_bucket.central_log_bucket.arn}/*"
     }]
   })
 }

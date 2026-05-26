@@ -1,4 +1,4 @@
-output "alb_access_logs_bucket" {
+output "central_log_bucket" {
  description = "alb_access logs bucket" 
- value = aws_s3_bucket.alb_access_logs_bucket.id
+ value = aws_s3_bucket.central_log_bucket.id
 }

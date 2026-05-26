@@ -4,7 +4,7 @@ resource "aws_ecs_task_definition" "service" {
   network_mode             = "awsvpc"
   cpu                      = 256
   memory                   = 512
-  execution_role_arn = 
+  execution_role_arn = aws_iam_role.ECS_task_Execution_Role.arn
   container_definitions = jsonencode([
     {
       name      = "cory-container"
@@ -19,4 +19,23 @@ resource "aws_ecs_task_definition" "service" {
         }]
     }
   ])
+}
+resource "aws_iam_role" "ECS_task_Execution_Role" {
+  name = "ECSTaskExecutionRole"
+  assume_role_policy = jsonencode({
+     Version = "2012-10-17"
+    Statement = [{
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ecs-tasks.amazonaws.com"
+        }
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy_attachment" {
+  role       = aws_iam_role.ECS_task_Execution_Role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }

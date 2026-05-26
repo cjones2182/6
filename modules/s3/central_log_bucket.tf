@@ -1,6 +1,6 @@
 # bucket creation 
 resource "aws_s3_bucket" "central_log_bucket281330" {  
-  bucket = "central_log_bucket281330"
+  bucket = "central-log-bucket281330"
 
 object_lock_enabled = true
 }
@@ -48,7 +48,7 @@ resource "aws_s3_bucket_policy" "access_logs_bucket_policy" {
  bucket =  aws_s3_bucket.central_log_bucket281330.id
 
  policy = jsonencode({
-    Version = 2012-10-17
+    "Version": "2012-10-17"
 
    "Statement": [
     {
@@ -57,7 +57,7 @@ resource "aws_s3_bucket_policy" "access_logs_bucket_policy" {
         "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
       },
       "Action": "s3:PutObject"
-      "resource": "${aws_s3_bucket.central_log_bucket281330.arn}/*"
+      "Resource": "${aws_s3_bucket.central_log_bucket281330.arn}/*"
     }]
   })
 }

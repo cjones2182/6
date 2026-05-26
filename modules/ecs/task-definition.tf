@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "service" {
   container_definitions = jsonencode([
     {
       name      = "cory-container"
-      image     = ""
+      image     = "856480644010.dkr.ecr.us-east-1.amazonaws/cory-app:v1"
       cpu       = 256
       memory    = 512
       essential = true

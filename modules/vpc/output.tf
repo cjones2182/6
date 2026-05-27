@@ -10,3 +10,7 @@ output "database_subnets" {
   description = "database subnets"
   value = aws_subnet.database_subnets[*].id
 }
+output "private_subnets" {
+  description = "private subnets"
+  value = aws_subnet.private_subnets[*].id
+}
